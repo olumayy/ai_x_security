@@ -7,8 +7,17 @@ import numpy as np
 import sys
 from pathlib import Path
 
-# Add labs to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab01-phishing-classifier" / "solution"))
+# Clear any existing 'main' module and lab paths to avoid conflicts
+for key in list(sys.modules.keys()):
+    if key == 'main' or key.startswith('main.'):
+        del sys.modules[key]
+
+# Remove any existing lab paths from sys.path
+sys.path = [p for p in sys.path if '/labs/lab' not in p]
+
+# Add this lab's path
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab01-phishing-classifier" / "solution")
+sys.path.insert(0, lab_path)
 
 from main import (
     load_data,
