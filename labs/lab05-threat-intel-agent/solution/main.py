@@ -3,6 +3,61 @@
 Lab 05: Threat Intelligence Agent - Solution
 
 Complete implementation of AI agent for threat intelligence gathering.
+
+=============================================================================
+OVERVIEW
+=============================================================================
+
+This lab introduces the concept of AI AGENTS - autonomous systems that can
+reason about tasks, use tools, and work toward goals with minimal human
+intervention. This is a foundational concept for building AI-powered
+security automation.
+
+KEY CONCEPTS:
+
+1. ReAct PATTERN (Reasoning + Acting)
+   - The agent thinks about what to do (Thought)
+   - Takes an action using a tool (Action)
+   - Observes the result (Observation)
+   - Repeats until goal is achieved
+   - This mimics how human analysts work
+
+2. TOOL USE
+   - Agents extend LLM capabilities with external tools
+   - Tools provide real-world data (threat intel, CVE lookup, etc.)
+   - Tools are defined with clear input/output schemas
+   - The LLM decides WHICH tool to use and HOW
+
+3. MEMORY SYSTEMS
+   - Short-term: Current conversation context
+   - Working memory: Findings gathered during investigation
+   - Long-term: Could include past investigations (not in this lab)
+
+4. AUTONOMOUS INVESTIGATION
+   - Given IOCs, the agent independently:
+     - Looks up each indicator
+     - Correlates findings
+     - Identifies threat patterns
+     - Provides recommendations
+
+LEARNING OBJECTIVES:
+- Understand the ReAct agent pattern
+- Learn to design tools for agent use
+- Practice building memory systems
+- Implement multi-step reasoning workflows
+
+REAL-WORLD APPLICATIONS:
+- Automated threat triage
+- IOC enrichment pipelines
+- SOAR playbook execution
+- Threat hunting assistance
+
+MITRE ATT&CK TECHNIQUES DEMONSTRATED:
+- Gathering adversary infrastructure (IPs, domains)
+- Mapping techniques to ATT&CK (T1059, T1053, etc.)
+- Understanding threat actor TTPs
+
+=============================================================================
 """
 
 import os
@@ -12,6 +67,7 @@ from typing import List, Dict, Optional, Any
 from datetime import datetime
 from pathlib import Path
 
+# Load environment variables (API keys)
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -34,6 +90,23 @@ console = Console()
 
 # =============================================================================
 # Mock Threat Intelligence Data
+# =============================================================================
+#
+# In a production environment, these would be API calls to services like:
+# - VirusTotal: File/URL/IP reputation
+# - AbuseIPDB: IP address abuse reports
+# - Shodan: Internet-connected device data
+# - AlienVault OTX: Open threat intelligence
+# - MISP: Malware Information Sharing Platform
+#
+# For this lab, we use mock data to:
+# 1. Allow offline development and testing
+# 2. Provide consistent, reproducible results
+# 3. Demonstrate the data structures used in real APIs
+#
+# The mock data represents realistic threat intelligence findings,
+# including C2 infrastructure, malware hashes, and ATT&CK techniques.
+#
 # =============================================================================
 
 MOCK_IP_DATA = {
@@ -131,6 +204,39 @@ MOCK_MITRE_DATA = {
 # =============================================================================
 # Tool Implementations
 # =============================================================================
+#
+# DESIGNING TOOLS FOR AI AGENTS:
+#
+# Tools are the bridge between the LLM's reasoning and real-world actions.
+# Each tool should be:
+#
+# 1. WELL-DEFINED: Clear name, description, and input schema
+#    - The description tells the LLM when to use the tool
+#    - The input schema (using Pydantic) validates parameters
+#
+# 2. SINGLE-PURPOSE: One tool = one capability
+#    - ip_lookup for IPs, domain_analysis for domains
+#    - Makes it easier for the LLM to choose the right tool
+#
+# 3. ROBUST: Handle errors gracefully
+#    - Return meaningful error messages
+#    - Don't crash on invalid input
+#
+# 4. CONSISTENT OUTPUT: Return structured data
+#    - Always return JSON/dict for machine parsing
+#    - Include status indicators (is_malicious, confidence, etc.)
+#
+# PYDANTIC MODELS:
+# We use Pydantic BaseModel to define tool input schemas.
+# This provides:
+# - Automatic validation of inputs
+# - Clear documentation for the LLM
+# - Type safety
+#
+# =============================================================================
+
+# Pydantic models define the expected inputs for each tool
+# These are used by LangChain to generate tool schemas for the LLM
 
 class IPLookupInput(BaseModel):
     ip: str = Field(description="IPv4 or IPv6 address to look up")
@@ -259,6 +365,35 @@ def get_tools() -> List[StructuredTool]:
 # =============================================================================
 # Agent Memory
 # =============================================================================
+#
+# MEMORY SYSTEMS FOR AGENTS:
+#
+# Memory is crucial for agents that need to maintain context across multiple
+# tool calls and build up knowledge during an investigation.
+#
+# TYPES OF MEMORY:
+#
+# 1. CONVERSATION HISTORY (Short-term)
+#    - Recent messages between user and agent
+#    - Limited to prevent context overflow
+#    - Trimmed using a sliding window (max_history)
+#
+# 2. INVESTIGATION FINDINGS (Working memory)
+#    - Results from tool calls stored for correlation
+#    - Tracks which IOCs have been investigated
+#    - Enables the agent to avoid redundant lookups
+#
+# 3. CONTEXT GENERATION
+#    - Summarizes memory for inclusion in prompts
+#    - Helps the agent "remember" what it found
+#    - Critical for multi-step investigations
+#
+# WHY MEMORY MATTERS:
+# Without memory, the agent would forget what it learned in previous steps.
+# For example, if it looks up an IP and finds it's malicious, it needs to
+# remember this when correlating with other findings.
+#
+# =============================================================================
 
 class AgentMemory:
     """Memory system for the threat intelligence agent."""
@@ -318,7 +453,43 @@ class AgentMemory:
 # =============================================================================
 # Threat Intelligence Agent
 # =============================================================================
+#
+# THE ReAct AGENT PATTERN:
+#
+# ReAct (Reasoning + Acting) is a prompting strategy that enables LLMs to
+# solve complex tasks by interleaving reasoning and action steps.
+#
+# THE LOOP:
+# 1. THOUGHT: Agent reasons about what to do next
+#    "I need to look up this IP to determine if it's malicious..."
+#
+# 2. ACTION: Agent chooses a tool and provides inputs
+#    Action: ip_lookup
+#    Action Input: {"ip": "185.143.223.47"}
+#
+# 3. OBSERVATION: Agent receives tool output
+#    Observation: {"is_malicious": true, "threat_types": ["C2"]}
+#
+# 4. REPEAT: Agent continues until reaching a conclusion
+#
+# 5. FINAL ANSWER: Agent synthesizes findings into a response
+#
+# IMPLEMENTATION NOTES:
+#
+# - MAX_ITERATIONS: Prevents infinite loops (set to 10)
+# - PARSING: Extract Action/Action Input from LLM output using regex
+# - ERROR HANDLING: Unknown tools or parse failures are handled gracefully
+# - MEMORY: Findings are stored for correlation across steps
+#
+# WHY ReAct WORKS:
+# By making the agent's reasoning explicit, we can:
+# - Debug agent behavior
+# - Guide the reasoning process
+# - Ensure systematic investigation
+#
+# =============================================================================
 
+# Agent system prompt defines its capabilities and expected behavior
 AGENT_SYSTEM_PROMPT = """You are a threat intelligence analyst AI agent.
 
 Your capabilities:

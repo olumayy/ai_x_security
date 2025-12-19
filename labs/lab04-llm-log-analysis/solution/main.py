@@ -3,6 +3,53 @@
 Lab 04: LLM-Powered Security Log Analysis - SOLUTION
 
 Complete implementation of LLM-powered security log analysis.
+
+=============================================================================
+OVERVIEW
+=============================================================================
+
+This lab demonstrates how to use Large Language Models (LLMs) to analyze
+security logs, extract indicators of compromise (IOCs), and generate
+actionable incident reports. This is a fundamental skill for Security
+Operations Center (SOC) analysts and incident responders.
+
+KEY CONCEPTS:
+
+1. PROMPT ENGINEERING FOR SECURITY
+   - System prompts define the LLM's role and expertise
+   - Structured output formats ensure consistent, parseable results
+   - Multi-step prompting breaks complex analysis into manageable tasks
+
+2. LOG PARSING WITH LLMs
+   - LLMs can parse unstructured logs into structured JSON
+   - They understand log formats (Windows Event, Syslog, etc.)
+   - Severity scoring based on security context
+
+3. THREAT ANALYSIS
+   - MITRE ATT&CK technique mapping
+   - Attack chain reconstruction
+   - IOC extraction and categorization
+
+4. INCIDENT REPORT GENERATION
+   - Executive summaries for stakeholders
+   - Technical details for responders
+   - Actionable recommendations
+
+LEARNING OBJECTIVES:
+- Understand how to craft effective security-focused prompts
+- Learn to parse and structure log data using LLMs
+- Practice extracting IOCs from text
+- Map activities to MITRE ATT&CK techniques
+- Generate professional incident reports
+
+MITRE ATT&CK TECHNIQUES COVERED:
+- T1059.001 - PowerShell Execution
+- T1547.001 - Registry Run Keys / Startup Folder
+- T1053.005 - Scheduled Task/Job
+- T1082     - System Information Discovery
+- T1071.001 - Web Protocols (C2)
+
+=============================================================================
 """
 
 import os
@@ -12,6 +59,7 @@ from typing import List, Dict, Optional
 from pathlib import Path
 from datetime import datetime
 
+# Load environment variables from .env file (contains API keys)
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -39,9 +87,35 @@ console = Console()
 # =============================================================================
 # Task 1: Set Up LLM Client - SOLUTION
 # =============================================================================
+#
+# The LLM client is our interface to the AI model. Key considerations:
+#
+# - PROVIDER SELECTION: Anthropic (Claude) vs Ollama (local)
+#   - Anthropic: Higher quality, requires API key, has costs
+#   - Ollama: Free, runs locally, good for development
+#
+# - TEMPERATURE = 0: We want deterministic, consistent outputs
+#   for security analysis. Higher temperatures introduce randomness.
+#
+# - MAX_TOKENS: Limit response length to control costs and focus
+#
+# =============================================================================
 
 def setup_llm(provider: str = "anthropic"):
-    """Initialize the LLM client."""
+    """
+    Initialize the LLM client for security log analysis.
+
+    Args:
+        provider: "anthropic" for Claude API, "ollama" for local models
+
+    Returns:
+        Configured LLM client ready for inference
+
+    Raises:
+        ImportError: If required libraries are not installed
+        ValueError: If API key is not configured
+        RuntimeError: If LLM connection test fails
+    """
 
     if provider == "anthropic":
         if not ANTHROPIC_AVAILABLE:
@@ -82,7 +156,29 @@ def setup_llm(provider: str = "anthropic"):
 # =============================================================================
 # Task 2: Log Parser Agent - SOLUTION
 # =============================================================================
+#
+# PROMPT ENGINEERING FOR LOG PARSING:
+#
+# The system prompt establishes the LLM's persona and expected behavior.
+# Key elements of an effective security log parsing prompt:
+#
+# 1. ROLE DEFINITION: "You are a security log parser" - tells the model
+#    what expertise to apply
+#
+# 2. OUTPUT STRUCTURE: Explicitly define the JSON schema you want
+#    - This ensures consistent, machine-parseable output
+#    - List all expected fields with descriptions
+#
+# 3. CONSTRAINTS: "Return ONLY valid JSON" prevents extraneous text
+#    that would break parsing
+#
+# 4. SECURITY CONTEXT: Include severity scoring (1-10) based on
+#    security risk, not just log level
+#
+# =============================================================================
 
+# System prompt that establishes the LLM's role as a security log parser
+# Note: System prompts persist across the conversation and set behavior
 PARSER_SYSTEM_PROMPT = """You are a security log parser. Extract structured information from raw security logs.
 
 For each log entry, extract:
@@ -155,7 +251,34 @@ def parse_multiple_logs(llm, log_text: str) -> List[dict]:
 # =============================================================================
 # Task 3: Threat Detection Analyzer - SOLUTION
 # =============================================================================
+#
+# THREAT ANALYSIS WITH LLMs:
+#
+# This is where LLMs truly shine - they can correlate multiple log entries,
+# identify attack patterns, and map activities to frameworks like MITRE ATT&CK.
+#
+# KEY CAPABILITIES:
+#
+# 1. PATTERN RECOGNITION: LLMs can identify suspicious patterns across logs
+#    - Unusual command sequences (discovery → persistence → exfiltration)
+#    - Time-based anomalies (3 AM activity, rapid-fire commands)
+#    - User behavior anomalies (admin tools from normal user)
+#
+# 2. ATTACK CHAIN RECONSTRUCTION: Build the narrative of what happened
+#    - Initial access → Execution → Persistence → Exfiltration
+#    - This helps responders understand scope and impact
+#
+# 3. MITRE ATT&CK MAPPING: Link observed behaviors to known techniques
+#    - Provides common vocabulary for threat intel sharing
+#    - Enables defensive gap analysis
+#
+# 4. CONFIDENCE SCORING: How certain is the analysis?
+#    - High confidence: Clear IOCs, known-bad indicators
+#    - Low confidence: Ambiguous activity, needs investigation
+#
+# =============================================================================
 
+# Expert analyst prompt with domain knowledge for threat detection
 ANALYZER_SYSTEM_PROMPT = """You are an expert security analyst specializing in
 threat detection and incident response. You have deep knowledge of:
 - Windows Event Logs and their security implications
@@ -220,6 +343,41 @@ Return JSON with:
 
 # =============================================================================
 # Task 4: IOC Extractor - SOLUTION
+# =============================================================================
+#
+# INDICATOR OF COMPROMISE (IOC) EXTRACTION:
+#
+# IOCs are forensic artifacts that indicate potential malicious activity.
+# Extracting them accurately is critical for threat intelligence and defense.
+#
+# IOC TYPES AND VALIDATION:
+#
+# 1. IP ADDRESSES
+#    - IPv4: Validate with regex pattern ^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$
+#    - Exclude internal IPs (10.x, 172.16-31.x, 192.168.x) for external threats
+#
+# 2. DOMAINS
+#    - Exclude internal domains (localhost, .local, .internal)
+#    - Validate TLD exists
+#
+# 3. FILE HASHES
+#    - MD5: 32 hex characters (legacy, collision-prone but still used)
+#    - SHA1: 40 hex characters (deprecated but common)
+#    - SHA256: 64 hex characters (preferred standard)
+#
+# 4. FILE PATHS
+#    - Windows: C:\, %APPDATA%, etc.
+#    - Linux: /tmp, /var, etc.
+#    - Look for suspicious locations (temp, appdata, public)
+#
+# 5. USER ACCOUNTS
+#    - Exclude system accounts (SYSTEM, NETWORK SERVICE)
+#    - Flag service accounts used interactively
+#
+# WHY VALIDATION MATTERS:
+# LLMs can hallucinate or extract partial matches. Validation ensures
+# only valid IOCs make it into threat intelligence feeds.
+#
 # =============================================================================
 
 def extract_iocs(llm, text: str) -> dict:
@@ -344,7 +502,54 @@ def validate_iocs(iocs: dict) -> dict:
 # =============================================================================
 # Task 5: Incident Summary Generator - SOLUTION
 # =============================================================================
+#
+# INCIDENT REPORT GENERATION:
+#
+# The final deliverable is a professional incident report that can be shared
+# with multiple stakeholders. LLMs excel at synthesizing technical data into
+# clear narratives.
+#
+# REPORT STRUCTURE (follows industry best practices):
+#
+# 1. EXECUTIVE SUMMARY
+#    - 2-3 sentences for leadership
+#    - Impact and risk level
+#    - No technical jargon
+#
+# 2. TIMELINE
+#    - Chronological sequence of events
+#    - Helps understand attack progression
+#    - Critical for legal/forensic purposes
+#
+# 3. TECHNICAL ANALYSIS
+#    - Detailed breakdown for responders
+#    - Tools and techniques used by attacker
+#    - Evidence and artifacts
+#
+# 4. MITRE ATT&CK MAPPING
+#    - Industry-standard technique references
+#    - Enables threat intel sharing
+#    - Supports detection rule development
+#
+# 5. INDICATORS OF COMPROMISE
+#    - Network IOCs (IPs, domains, URLs)
+#    - Host IOCs (files, hashes, registry)
+#    - Account IOCs (compromised users)
+#
+# 6. RECOMMENDATIONS
+#    - Prioritized by urgency (IMMEDIATE, SHORT-TERM, LONG-TERM)
+#    - Specific and actionable
+#    - Include both containment and prevention
+#
+# MARKDOWN OUTPUT:
+# Using Markdown allows for:
+# - Easy rendering in web interfaces
+# - Professional formatting
+# - Table support for structured data
+#
+# =============================================================================
 
+# Report writer prompt emphasizing clarity for mixed audiences
 SUMMARY_SYSTEM_PROMPT = """You are a senior security analyst writing an incident report.
 Your audience includes both technical staff and executives.
 

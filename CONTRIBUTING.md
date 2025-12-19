@@ -80,8 +80,32 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Install dev dependencies
-pip install pytest pytest-cov black flake8 mypy
+# Install pre-commit hooks (recommended)
+pip install pre-commit
+pre-commit install
+
+# Run tests to verify setup
+pytest tests/ -v
+```
+
+### Pre-commit Hooks
+
+This repository includes a `.pre-commit-config.yaml` with the following checks:
+- **Black** - Code formatting
+- **isort** - Import sorting
+- **Flake8** - Linting with bugbear and comprehensions
+- **Bandit** - Security scanning
+- **General checks** - Trailing whitespace, YAML validation, private key detection
+- **Markdownlint** - Markdown formatting
+
+Pre-commit runs automatically on `git commit`. To run manually:
+
+```bash
+# Run on all files
+pre-commit run --all-files
+
+# Run specific hook
+pre-commit run black --all-files
 ```
 
 ## Code Style

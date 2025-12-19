@@ -16,14 +16,42 @@ python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
 # 3. Install dependencies
-pip install langchain langchain-anthropic chromadb yara-python
+pip install -r requirements.txt
 
 # 4. Set API key
-export ANTHROPIC_API_KEY="sk-ant-..."  # Windows: set ANTHROPIC_API_KEY=sk-ant-...
+cp .env.example .env
+# Edit .env with your ANTHROPIC_API_KEY
 
 # 5. Test it works
 python -c "from anthropic import Anthropic; print('Ready!')"
+
+# 6. Run your first lab
+python labs/lab01-phishing-classifier/solution/main.py
 ```
+
+### 🐳 Docker Quick Start (Alternative)
+
+```bash
+# Build and run with Docker Compose
+docker-compose up dev
+
+# Run tests in container
+docker-compose run test
+
+# Launch Jupyter notebooks
+docker-compose up notebook
+# Open http://localhost:8888
+```
+
+### ☁️ Google Colab (Zero Setup)
+
+Run labs directly in your browser - no local setup required:
+
+| Lab | Open in Colab |
+|-----|---------------|
+| Lab 01: Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) |
+| Lab 02: Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_malware_clustering.ipynb) |
+| All 12 labs available | [Browse notebooks →](../../notebooks/) |
 
 ---
 

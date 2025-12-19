@@ -1,7 +1,7 @@
 # AI Development Training Program: Offensive Security & DFIR
 
 [![24 Weeks](https://img.shields.io/badge/Duration-24%20Weeks-blue.svg)]()
-[![10 Labs](https://img.shields.io/badge/Labs-10-green.svg)]()
+[![12 Labs](https://img.shields.io/badge/Labs-12-green.svg)]()
 [![4 Capstones](https://img.shields.io/badge/Capstones-4-orange.svg)]()
 
 ## 🎯 Program Mission
@@ -49,7 +49,7 @@ Develop security practitioners who can architect, build, and deploy AI-powered t
 
 | Resource | Description |
 |----------|-------------|
-| [Labs](../labs/) | 10 hands-on implementation labs |
+| [Labs](../labs/) | 12 hands-on implementation labs |
 | [Capstone Projects](../capstone-projects/) | 4 comprehensive final projects |
 | [Templates](../templates/) | Reusable agent and integration templates |
 | [Setup Guide](../setup/dev-environment-setup.md) | Development environment setup |

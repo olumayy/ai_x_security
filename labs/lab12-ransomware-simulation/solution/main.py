@@ -5,6 +5,62 @@ Complete solution implementation.
 
 ETHICAL NOTICE: This code is for AUTHORIZED TESTING ONLY.
 Only use in isolated test environments with proper authorization.
+
+=============================================================================
+OVERVIEW
+=============================================================================
+
+This lab teaches Purple Team methodologies - the combination of red team
+(offensive) and blue team (defensive) skills to improve security posture.
+We simulate ransomware behaviors SAFELY to test and validate detections.
+
+KEY CONCEPTS:
+
+1. PURPLE TEAM OPERATIONS
+   - Red + Blue working together
+   - Controlled adversary emulation
+   - Detection validation
+   - Gap analysis and improvement
+
+2. SAFE SIMULATION PRINCIPLES
+   - NEVER deploy actual ransomware
+   - Use safe proxies (file renaming, not encryption)
+   - Operate only in designated test environments
+   - Full audit logging of all actions
+   - Automatic cleanup after exercises
+
+3. RANSOMWARE TTPs (Tactics, Techniques, Procedures)
+   - T1486: Data Encrypted for Impact
+   - T1490: Inhibit System Recovery (shadow copy deletion)
+   - T1082: System Information Discovery
+   - T1567: Exfiltration Over Web Service
+
+4. DETECTION VALIDATION
+   - Test each TTP against your detection stack
+   - Measure detection coverage
+   - Identify gaps and prioritize improvements
+
+LEARNING OBJECTIVES:
+- Understand purple team methodologies
+- Learn safe adversary emulation techniques
+- Practice detection validation workflows
+- Build gap analysis capabilities
+
+SAFETY FEATURES IN THIS CODE:
+- Target directory validation (temp/test dirs only)
+- No actual encryption (just file renaming)
+- No destructive operations
+- Comprehensive audit logging
+- Automatic cleanup
+
+RANSOMWARE FAMILIES SIMULATED:
+- LockBit: Fast encryption, double extortion
+- BlackCat: Rust-based, cross-platform
+- Conti: Manual operation phase
+- REvil: High-profile enterprise targeting
+- Ryuk: Big game hunting
+
+=============================================================================
 """
 
 import os
@@ -22,7 +78,26 @@ from anthropic import Anthropic
 # =============================================================================
 # Enums and Data Classes
 # =============================================================================
+#
+# DATA MODELING FOR PURPLE TEAM:
+#
+# Using Python dataclasses and enums provides:
+# 1. Type safety and IDE autocompletion
+# 2. Self-documenting code structure
+# 3. Consistent data structures across the system
+#
+# KEY DATA STRUCTURES:
+#
+# - RansomwareFamily: Known ransomware variants we can emulate
+# - DetectionStatus: Track test results (detected/missed/partial)
+# - AttackScenario: Complete attack playbook definition
+# - SimulationConfig: Safety settings for the simulator
+# - DetectionTest: Individual test case definition
+# - TestResult: Outcome of running a detection test
+#
+# =============================================================================
 
+# Ransomware families we can simulate (each has unique TTPs)
 class RansomwareFamily(Enum):
     LOCKBIT = "lockbit"
     BLACKCAT = "blackcat"
@@ -249,6 +324,42 @@ class ScenarioGenerator:
 # =============================================================================
 # Safe Simulator
 # =============================================================================
+#
+# SAFE ADVERSARY EMULATION:
+#
+# The key principle is to simulate BEHAVIORS, not actual malicious code.
+# This allows security teams to test detections without risk.
+#
+# WHAT WE SIMULATE:
+#
+# 1. FILE ENUMERATION (T1083)
+#    - Ransomware scans for files to encrypt
+#    - We log what would be targeted
+#
+# 2. ENCRYPTION (T1486)
+#    - Instead of encrypting, we RENAME files with .encrypted extension
+#    - This triggers the same file system events
+#    - No data is lost or modified
+#
+# 3. SHADOW COPY DELETION (T1490)
+#    - We LOG the commands that would be run
+#    - We do NOT actually delete shadow copies
+#
+# 4. RANSOM NOTE CREATION
+#    - Create actual ransom note files (harmless text)
+#    - Tests file creation detection rules
+#
+# SAFETY VALIDATION:
+# - _validate_config() ensures we only operate in safe directories
+# - Allowed: /tmp, tempfile.gettempdir(), /opt/purple_team
+# - Rejected: Any other path (raises ValueError)
+#
+# AUDIT LOGGING:
+# - Every action is logged with timestamp
+# - Log can be exported for SIEM testing
+# - Full traceability of simulation
+#
+# =============================================================================
 
 class SafeRansomwareSimulator:
     """
@@ -462,6 +573,34 @@ Test ID: PURPLE-TEAM-{timestamp}
 # =============================================================================
 # Detection Validator
 # =============================================================================
+#
+# DETECTION VALIDATION FRAMEWORK:
+#
+# After running simulations, we need to validate whether our security
+# tools actually detected the activity. This is the core of purple team.
+#
+# THE VALIDATION WORKFLOW:
+#
+# 1. EXECUTE: Run a simulation (e.g., simulate encryption)
+# 2. WAIT: Allow time for detection systems to process
+# 3. QUERY: Check SIEM/EDR for alerts
+# 4. RECORD: Document detection status (DETECTED/MISSED/PARTIAL)
+# 5. ANALYZE: Calculate coverage and identify gaps
+#
+# DETECTION STATUSES:
+#
+# - DETECTED: Alert generated, correct technique identified
+# - PARTIAL: Alert generated, but missing context
+# - MISSED: No alert generated
+# - PENDING: Waiting for validation
+#
+# GAP ANALYSIS:
+# The generate_gap_analysis() method calculates:
+# - Detection coverage percentage
+# - List of missed techniques
+# - Prioritized improvement recommendations
+#
+# =============================================================================
 
 class DetectionValidator:
     """Validate detection capabilities against ransomware TTPs."""
@@ -509,6 +648,47 @@ class DetectionValidator:
 
 # =============================================================================
 # Exercise Orchestrator
+# =============================================================================
+#
+# PURPLE TEAM EXERCISE MANAGEMENT:
+#
+# The orchestrator coordinates all components of a purple team exercise:
+# - Scenario generation
+# - Simulation execution
+# - Detection validation
+# - Report generation
+#
+# EXERCISE PHASES:
+#
+# 1. PREPARATION (30 min)
+#    - Select ransomware family to emulate
+#    - Configure simulation parameters
+#    - Brief blue team (optional - depends on exercise type)
+#
+# 2. EXECUTION (60 min)
+#    - Run simulations in controlled environment
+#    - Generate telemetry for SIEM/EDR
+#    - Document all actions
+#
+# 3. DETECTION VALIDATION (30 min)
+#    - Query security tools for alerts
+#    - Validate detection accuracy
+#    - Record results
+#
+# 4. GAP ANALYSIS (30 min)
+#    - Calculate coverage metrics
+#    - Identify missed detections
+#    - Prioritize improvements
+#
+# 5. REPORTING (30 min)
+#    - Generate executive summary
+#    - Document technical findings
+#    - Recommend next steps
+#
+# AI-POWERED REPORTING:
+# We use Claude to generate professional reports from exercise data.
+# The LLM synthesizes technical findings into actionable recommendations.
+#
 # =============================================================================
 
 class PurpleTeamExercise:
