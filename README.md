@@ -5,6 +5,8 @@
 [![CI](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml/badge.svg)](https://github.com/depalmar/ai_for_the_win/actions/workflows/ci.yml)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
 A comprehensive 24-week training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation.
 
@@ -26,20 +28,36 @@ A comprehensive 24-week training program for security practitioners who want to 
 
 ## What You'll Build
 
-| Project | Description | Skills |
-|---------|-------------|--------|
-| **Phishing Classifier** | ML model to detect phishing emails | Text classification, TF-IDF, Random Forest |
-| **Malware Clusterer** | Group malware samples by behavior | K-Means, DBSCAN, feature engineering |
-| **Anomaly Detector** | Find threats in network traffic | Isolation Forest, LOF, baseline detection |
-| **Log Analyzer** | LLM-powered security log analysis | Prompt engineering, IOC extraction |
-| **Threat Intel Agent** | Autonomous threat research agent | ReAct pattern, tool use, LangChain |
-| **Security RAG** | Q&A over security documentation | Vector search, ChromaDB, embeddings |
-| **YARA Generator** | AI-generated detection rules | Code generation, malware analysis |
-| **Vuln Prioritizer** | Smart vulnerability triage | Risk scoring, remediation planning |
-| **Detection Pipeline** | Multi-stage threat detection | ML filtering, LLM enrichment, correlation |
-| **IR Copilot** | Conversational IR assistant | Agents, state management, playbooks |
-| **Ransomware Detector** | Detect and respond to ransomware | Behavioral detection, LLM analysis, IR playbooks |
-| **Purple Team Simulator** | Safe ransomware simulation | Adversary emulation, detection validation |
+### Labs Overview
+
+| Lab | Project | What You'll Learn |
+|-----|---------|-------------------|
+| **01** | **Phishing Classifier** | Text preprocessing, TF-IDF vectorization, Random Forest classification, model evaluation metrics |
+| **02** | **Malware Clusterer** | Feature extraction from binaries, K-Means & DBSCAN clustering, dimensionality reduction, cluster analysis |
+| **03** | **Anomaly Detector** | Statistical baselines, Isolation Forest, Local Outlier Factor, threshold optimization for security |
+| **04** | **Log Analyzer** | Prompt engineering for security, structured output parsing, IOC extraction, LLM-powered analysis |
+| **05** | **Threat Intel Agent** | ReAct pattern implementation, tool use with LangChain, autonomous investigation workflows |
+| **06** | **Security RAG** | Document chunking, vector embeddings, ChromaDB, retrieval-augmented generation for Q&A |
+| **07** | **YARA Generator** | Static malware analysis, pattern extraction, AI-assisted rule generation, rule validation |
+| **08** | **Vuln Prioritizer** | CVSS scoring, risk-based prioritization, remediation planning with LLMs |
+| **09** | **Detection Pipeline** | Multi-stage architectures, ML filtering, LLM enrichment, alert correlation |
+| **10** | **IR Copilot** | Conversational agents, state management, playbook execution, incident documentation |
+| **11** | **Ransomware Detector** | Entropy analysis, behavioral detection, ransom note IOC extraction, response automation |
+| **12** | **Purple Team Sim** | Safe adversary emulation, detection validation, gap analysis, purple team exercises |
+
+### Skills Progression
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│  FOUNDATIONS          │  INTERMEDIATE           │  ADVANCED             │
+│  Labs 01-03           │  Labs 04-07             │  Labs 08-12           │
+├───────────────────────┼─────────────────────────┼───────────────────────┤
+│  • Supervised ML      │  • Prompt Engineering   │  • System Design      │
+│  • Unsupervised ML    │  • AI Agents            │  • Multi-stage ML+LLM │
+│  • Feature Eng.       │  • RAG Systems          │  • Production IR      │
+│  • Model Evaluation   │  • Code Generation      │  • Purple Teaming     │
+└─────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -67,40 +85,66 @@ cd labs/lab01-phishing-classifier
 python solution/main.py
 ```
 
+### Docker Quick Start
+
+```bash
+# Build and run with Docker Compose
+docker-compose up dev
+
+# Run tests in container
+docker-compose run test
+
+# Launch Jupyter notebooks
+docker-compose up notebook
+# Open http://localhost:8888
+```
+
+### Google Colab
+
+Run labs directly in your browser - no setup required:
+
+| Lab | Colab Link |
+|-----|------------|
+| Lab 01: Phishing Classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb) |
+| Lab 02: Malware Clustering | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab02_malware_clustering.ipynb) |
+| Lab 03: Anomaly Detection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab03_anomaly_detection.ipynb) |
+| Lab 04: Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) |
+| Lab 05: Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) |
+| Lab 06: Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) |
+| All 12 labs available | [Browse notebooks →](./notebooks/) |
+
 ---
 
 ## Repository Structure
 
 ```
 ai_for_the_win/
-├── curriculum/                    # 24-week training program
-│   └── ai-security-training-program.md
 ├── labs/                          # 12 hands-on labs
-│   ├── lab01-phishing-classifier/
-│   ├── lab02-malware-clustering/
-│   ├── lab03-anomaly-detection/
-│   ├── lab04-llm-log-analysis/
-│   ├── lab05-threat-intel-agent/
-│   ├── lab06-security-rag/
-│   ├── lab07-yara-generator/
-│   ├── lab08-vuln-scanner-ai/
-│   ├── lab09-detection-pipeline/
-│   ├── lab10-ir-copilot/
-│   ├── lab11-ransomware-detection/
-│   └── lab12-ransomware-simulation/
+│   ├── lab01-phishing-classifier/ # ML text classification
+│   ├── lab02-malware-clustering/  # Unsupervised learning
+│   ├── lab03-anomaly-detection/   # Network security
+│   ├── lab04-llm-log-analysis/    # Prompt engineering
+│   ├── lab05-threat-intel-agent/  # ReAct agents
+│   ├── lab06-security-rag/        # Vector search + LLM
+│   ├── lab07-yara-generator/      # AI code generation
+│   ├── lab08-vuln-scanner-ai/     # Risk prioritization
+│   ├── lab09-detection-pipeline/  # Multi-stage ML+LLM
+│   ├── lab10-ir-copilot/          # Conversational IR
+│   ├── lab11-ransomware-detection/# DFIR + behavioral analysis
+│   └── lab12-ransomware-simulation/# Purple team exercises
+├── notebooks/                     # Jupyter notebooks (Colab-ready)
 ├── capstone-projects/             # 4 comprehensive projects
-│   ├── security-analyst-copilot/
-│   ├── automated-threat-hunter/
-│   ├── malware-analysis-assistant/
-│   └── vuln-intel-platform/
 ├── templates/                     # Reusable code templates
 │   ├── agents/                    # LangChain agent templates
-│   ├── n8n/                       # Automation workflows
 │   ├── prompts/                   # Security prompt library
-│   └── integrations/              # SIEM integrations
+│   ├── visualizations/            # Dashboards & diagrams
+│   └── reports/                   # Report generators
 ├── resources/                     # Tools, datasets, guides
 ├── setup/                         # Environment setup guides
-└── tests/                         # Test suite
+│   └── guides/                    # Troubleshooting & error handling
+├── tests/                         # Comprehensive test suite
+├── Dockerfile                     # Multi-stage Docker build
+└── docker-compose.yml             # Dev, test, notebook services
 ```
 
 ---
@@ -173,11 +217,11 @@ Track your progress through the labs:
 
 | Category | Tools |
 |----------|-------|
-| **AI/ML** | Claude API, LangChain, scikit-learn, PyTorch |
+| **AI/ML** | Claude API, LangChain, scikit-learn, NumPy, Pandas |
 | **Vector DB** | ChromaDB, embeddings |
 | **Security** | YARA, Sigma, MITRE ATT&CK |
-| **Automation** | n8n, Python scripts |
-| **Development** | Python 3.9+, pytest, GitHub Actions |
+| **Development** | Python 3.9+, pytest, Docker, GitHub Actions |
+| **Notebooks** | Jupyter, Google Colab |
 
 ---
 
@@ -207,11 +251,56 @@ Jumpstart your projects with ready-to-use templates:
 
 ---
 
+## Development
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest tests/ -v
+
+# Run specific lab tests
+pytest tests/test_lab01_phishing_classifier.py -v
+
+# Run with coverage
+pytest tests/ --cov=labs --cov-report=html
+
+# Run in Docker
+docker-compose run test
+```
+
+### Code Quality
+
+```bash
+# Format code
+black .
+isort .
+
+# Lint
+flake8 .
+
+# Security scan
+bandit -r labs/
+```
+
+### Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `ANTHROPIC_API_KEY` | Claude API key | Yes (for LLM labs) |
+| `VIRUSTOTAL_API_KEY` | VirusTotal API | Optional |
+| `ABUSEIPDB_API_KEY` | AbuseIPDB API | Optional |
+
+---
+
 ## Getting Help
 
-- **Documentation**: Check the [setup guides](./setup/) and [resources](./resources/)
+- **Troubleshooting**: Check the [troubleshooting guide](./setup/guides/troubleshooting-guide.md)
+- **Error Handling**: See [error handling best practices](./setup/guides/error-handling-guide.md)
+- **Documentation**: Browse [setup guides](./setup/) and [resources](./resources/)
 - **Issues**: Open a [GitHub issue](https://github.com/depalmar/ai_for_the_win/issues)
-- **Discussions**: Join [GitHub Discussions](https://github.com/depalmar/ai_for_the_win/discussions)
 
 ---
 
