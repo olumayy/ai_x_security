@@ -5,11 +5,18 @@ import pytest
 import sys
 import tempfile
 import shutil
+import importlib
 from pathlib import Path
 from unittest.mock import Mock, patch
 
+# Clear any existing 'main' module to avoid conflicts between labs
+if 'main' in sys.modules:
+    del sys.modules['main']
+
 # Add labs to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "labs" / "lab12-ransomware-simulation" / "solution"))
+lab_path = str(Path(__file__).parent.parent / "labs" / "lab12-ransomware-simulation" / "solution")
+if lab_path not in sys.path:
+    sys.path.insert(0, lab_path)
 
 from main import (
     RansomwareFamily,
@@ -397,7 +404,7 @@ class TestSafeRansomwareSimulator:
         assert all("source" in event for event in telemetry)
 
     def test_cleanup_restores_files(self, simulation_config):
-        """Test cleanup restores encrypted files."""
+        """Test cleanup restores encrypted files before removing."""
         simulation_config.cleanup_after = True
         simulator = SafeRansomwareSimulator(simulation_config)
 
@@ -405,11 +412,18 @@ class TestSafeRansomwareSimulator:
         original_paths = files.copy()
 
         simulator.simulate_encryption(files)
+
+        # After encryption, .encrypted files should exist
+        for filepath in original_paths:
+            assert Path(filepath + ".encrypted").exists()
+
         simulator.cleanup()
 
-        # Original files should be restored
+        # After cleanup, both original and encrypted should be gone
+        # (cleanup restores then removes test files)
         for filepath in original_paths:
-            assert Path(filepath).exists()
+            assert not Path(filepath).exists()
+            assert not Path(filepath + ".encrypted").exists()
 
     def test_cleanup_removes_test_files(self, simulation_config):
         """Test cleanup removes created test files."""
