@@ -2,24 +2,103 @@
 
 Practical labs for building AI-powered security tools.
 
+> 📖 **New to the course?** See the [Learning Guide](../LEARNING_GUIDE.md) for recommended paths and educational content.
+
 ---
 
-## Lab Overview
+## Labs by Difficulty (Recommended Order)
 
-| Lab | Topic | Difficulty | Time | Status |
-|-----|-------|------------|------|--------|
-| [01](./lab01-phishing-classifier/) | Phishing Email Classifier | ⭐ Beginner | 45-60 min | ✅ Ready |
-| [02](./lab02-malware-clustering/) | Malware Sample Clustering | ⭐⭐ Intermediate | 60-75 min | ✅ Ready |
-| [03](./lab03-anomaly-detection/) | Network Anomaly Detection | ⭐⭐ Intermediate | 60-75 min | ✅ Ready |
-| [04](./lab04-llm-log-analysis/) | LLM-Powered Log Analysis | ⭐⭐ Intermediate | 60-90 min | ✅ Ready |
-| [05](./lab05-threat-intel-agent/) | Threat Intelligence Agent | ⭐⭐⭐ Advanced | 90-120 min | ✅ Ready |
-| [06](./lab06-security-rag/) | RAG for Security Docs | ⭐⭐ Intermediate | 75-90 min | ✅ Ready |
-| [07](./lab07-yara-generator/) | AI YARA Rule Generator | ⭐⭐ Intermediate | 60-75 min | ✅ Ready |
-| [08](./lab08-vuln-scanner-ai/) | Vulnerability Scanner AI | ⭐⭐⭐ Advanced | 90-120 min | ✅ Ready |
-| [09](./lab09-detection-pipeline/) | Threat Detection Pipeline | ⭐⭐⭐ Advanced | 120-150 min | ✅ Ready |
-| [10](./lab10-ir-copilot/) | IR Copilot Agent | ⭐⭐⭐ Advanced | 120-150 min | ✅ Ready |
-| [11](./lab11-ransomware-detection/) | Ransomware Detection & Response | ⭐⭐⭐ Advanced | 240-300 min | ✅ Ready |
-| [12](./lab12-ransomware-simulation/) | Ransomware Simulation (Purple Team) | ⭐⭐⭐ Advanced | 240-300 min | ✅ Ready |
+### 🟢 Beginner - Start Here
+
+| # | Lab | Topic | Time | Key Skills |
+|---|-----|-------|------|------------|
+| 01 | [Phishing Classifier](./lab01-phishing-classifier/) | Email classification with ML | 45-60 min | TF-IDF, Random Forest, Metrics |
+| 03 | [Anomaly Detection](./lab03-anomaly-detection/) | Network anomaly detection | 60-75 min | Isolation Forest, Feature Engineering |
+
+### 🟡 Intermediate - Core Skills
+
+| # | Lab | Topic | Time | Key Skills |
+|---|-----|-------|------|------------|
+| 02 | [Malware Clustering](./lab02-malware-clustering/) | Unsupervised malware analysis | 60-75 min | K-Means, t-SNE, PE Analysis |
+| 04 | [LLM Log Analysis](./lab04-llm-log-analysis/) | Log parsing with LLMs | 60-90 min | Prompt Engineering, IOC Extraction |
+| 06 | [Security RAG](./lab06-security-rag/) | RAG for security docs | 75-90 min | Embeddings, ChromaDB, Retrieval |
+| 07 | [YARA Generator](./lab07-yara-generator/) | AI-generated detection rules | 60-75 min | Binary Analysis, Rule Generation |
+
+### 🟠 Advanced - Production Systems
+
+| # | Lab | Topic | Time | Key Skills |
+|---|-----|-------|------|------------|
+| 05 | [Threat Intel Agent](./lab05-threat-intel-agent/) | Autonomous investigation | 90-120 min | ReAct Agents, Tool Design, Memory |
+| 08 | [Vuln Scanner AI](./lab08-vuln-scanner-ai/) | AI-enhanced scanning | 90-120 min | CVSS, Risk Prioritization |
+| 09 | [Detection Pipeline](./lab09-detection-pipeline/) | Multi-stage detection | 120-150 min | ML Filtering, LLM Enrichment |
+| 10 | [IR Copilot](./lab10-ir-copilot/) | Incident response assistant | 120-150 min | Conversational AI, Orchestration |
+
+### 🔴 Expert - DFIR Specialization
+
+| # | Lab | Topic | Time | Key Skills |
+|---|-----|-------|------|------------|
+| 11 | [Ransomware Detection](./lab11-ransomware-detection/) | Ransomware DFIR | 4-5 hrs | Entropy, Behavioral Detection |
+| 12 | [Purple Team](./lab12-ransomware-simulation/) | Adversary emulation | 4-5 hrs | Safe Simulation, Gap Analysis |
+
+---
+
+## 🎯 Quick Paths
+
+| Your Goal | Labs | Time |
+|-----------|------|------|
+| **Just getting started** | 01 → 03 → 04 | 3-4 hours |
+| **Learn LLM security tools** | 04 → 06 → 05 | 4-5 hours |
+| **Build detection systems** | 03 → 09 → 11 | 6-8 hours |
+| **Complete curriculum** | All 12 labs | 20-30 hours |
+
+---
+
+## 🖥️ Interactive Demos
+
+Each lab includes a Gradio demo for quick experimentation:
+
+```bash
+# Run any lab's demo
+python labs/lab04-llm-log-analysis/demo/app.py
+
+# Or use the unified demo launcher
+python demo/launcher.py
+```
+
+---
+
+## 🔄 Workflow Orchestration
+
+Labs 09-12 use workflow orchestration for multi-stage pipelines:
+
+```python
+# Example from Lab 09: Detection Pipeline
+from langgraph.graph import StateGraph
+
+pipeline = StateGraph(DetectionState)
+pipeline.add_node("ingest", ingest_events)
+pipeline.add_node("ml_filter", isolation_forest_filter)
+pipeline.add_node("llm_enrich", enrich_with_context)
+pipeline.add_node("correlate", correlate_alerts)
+
+pipeline.add_edge("ingest", "ml_filter")
+pipeline.add_edge("ml_filter", "llm_enrich")
+pipeline.add_edge("llm_enrich", "correlate")
+```
+
+---
+
+## 🤖 Multi-Provider LLM Support
+
+All LLM labs support multiple providers:
+
+```python
+# Choose your provider
+llm = setup_llm(provider="anthropic")  # Claude
+llm = setup_llm(provider="openai")     # GPT-4
+llm = setup_llm(provider="gemini")     # Gemini 1.5 Pro
+llm = setup_llm(provider="ollama")     # Local Llama
+```
 
 ---
 
