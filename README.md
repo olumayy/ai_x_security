@@ -8,7 +8,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab01_phishing_classifier.ipynb)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](./Dockerfile)
 
-A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **18 labs** (including 2 intro labs), **4 capstone projects**, from absolute beginner to expert. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
+A hands-on training program for security practitioners who want to build AI-powered tools for threat detection, incident response, and security automation. **19 labs** (including 3 intro labs), **4 capstone projects**, from absolute beginner to expert. Designed for **vibe coding** with AI assistants like Cursor, Claude Code, and Copilot.
 
 ---
 
@@ -45,11 +45,11 @@ python solution/main.py
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
 │   🎯 INTRO             🟢 FOUNDATION        🟡 LLM TOOLS                │
-│   Labs 00a-00b         Labs 01-03           Labs 04-07                  │
+│   Labs 00a-00c         Labs 01-03           Labs 04-07                  │
 │   ────────────         ─────────────        ───────────                 │
 │   • Python Basics      • Text ML            • Prompt Eng                │
 │   • ML Concepts        • Clustering         • RAG Systems               │
-│                        • Anomaly Det        • Code Generation           │
+│   • Prompt Mastery     • Anomaly Det        • Code Generation           │
 │                                                                         │
 │   🟠 ADVANCED          🔴 EXPERT: Labs 11-16                            │
 │   Labs 05,08-10        ─────────────────────                            │
@@ -63,10 +63,10 @@ python solution/main.py
 
 | Your Background | Recommended Path | Time |
 |-----------------|------------------|------|
-| Completely new (no Python) | Labs 00a → 00b → 01 → 02 | 6-8 hours |
-| Know Python, new to ML | Labs 00b → 01 → 02 → 03 | 4-5 hours |
-| Know ML, new to LLMs | Labs 04 → 06 → 05 | 4-5 hours |
-| Want to build agents | Labs 04 → 05 → 10 | 5-6 hours |
+| Completely new (no Python) | Labs 00a → 00b → 00c → 01 | 8-10 hours |
+| Know Python, new to ML | Labs 00b → 00c → 01 → 02 | 6-8 hours |
+| Know ML, new to LLMs | Labs 00c → 04 → 06 → 05 | 7-9 hours |
+| Want to build agents | Labs 00c → 04 → 05 → 10 | 8-10 hours |
 | DFIR focus | Labs 04 → 05 → 11 → 13 → 14 | 15-18 hours |
 | Red Team/Offensive | Labs 12 → 14 → 15 → 16 | 16-20 hours |
 | Threat Intel Analyst | Labs 05 → 06 → 14 → 16 | 12-15 hours |
@@ -81,6 +81,7 @@ python solution/main.py
 |-----|---------|-------------------|
 | **00a** | **Python for Security** | Variables, files, APIs, regex, security-focused Python basics |
 | **00b** | **ML Concepts Primer** | Supervised/unsupervised learning, features, training, evaluation metrics |
+| **00c** | **Prompt Engineering Mastery** | Beginner-to-advanced prompting, AI Studio, hallucination detection, Plotly visualizations |
 | **01** | **Phishing Classifier** | Text preprocessing, TF-IDF vectorization, Random Forest classification, model evaluation metrics |
 | **02** | **Malware Clusterer** | Feature extraction from binaries, K-Means & DBSCAN clustering, dimensionality reduction, cluster analysis |
 | **03** | **Anomaly Detector** | Statistical baselines, Isolation Forest, Local Outlier Factor, threshold optimization for security |
@@ -164,7 +165,7 @@ Run labs directly in your browser - no setup required:
 | Lab 04: Log Analysis | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab04_llm_log_analysis.ipynb) |
 | Lab 05: Threat Intel Agent | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab05_threat_intel_agent.ipynb) |
 | Lab 06: Security RAG | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/depalmar/ai_for_the_win/blob/main/notebooks/lab06_security_rag.ipynb) |
-| All 18 labs available | [Browse notebooks →](./notebooks/) |
+| All 19 labs available | [Browse notebooks →](./notebooks/) |
 
 ---
 
@@ -172,9 +173,10 @@ Run labs directly in your browser - no setup required:
 
 ```
 ai_for_the_win/
-├── labs/                          # 18 hands-on labs
+├── labs/                          # 19 hands-on labs
 │   ├── lab00a-python-security-fundamentals/ # Python basics for security
 │   ├── lab00b-ml-concepts-primer/ # ML theory before coding
+│   ├── lab00c-prompt-engineering-mastery/ # Prompt design & verification
 │   ├── lab01-phishing-classifier/ # ML text classification
 │   ├── lab02-malware-clustering/  # Unsupervised learning
 │   ├── lab03-anomaly-detection/   # Network security
@@ -256,9 +258,10 @@ Vuln Scan  Pipeline   IR Bot    Your Project
 
 Track your progress through the labs:
 
-**Intro (Optional)**
+**Intro (Recommended)**
 - [ ] **Lab 00a**: Python for Security Fundamentals
 - [ ] **Lab 00b**: ML Concepts Primer
+- [ ] **Lab 00c**: Prompt Engineering Mastery
 
 **Core Labs**
 - [ ] **Lab 01**: Phishing Email Classifier

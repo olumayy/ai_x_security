@@ -12,25 +12,29 @@ Follow this progression for the best learning experience. Labs build on each oth
 
 ### 🎯 Getting Started: Prerequisites (Before Week 1)
 
-**New to Python or ML?** Start here before Lab 01.
+**New to Python, ML, or LLMs?** Start here before Lab 01.
 
 | # | Lab | Topic | Time | What You'll Learn |
 |---|-----|-------|------|-------------------|
 | 00a | [Python for Security](./lab00a-python-security-fundamentals/) | Python basics | 2-3 hrs | Variables, files, APIs, security examples |
 | 00b | [ML Concepts Primer](./lab00b-ml-concepts-primer/) | ML theory | 1-2 hrs | Supervised/unsupervised, features, evaluation |
+| 00c | [Prompt Engineering Mastery](./lab00c-prompt-engineering-mastery/) | LLM prompting | 3-4 hrs | Prompt design, hallucination detection, AI Studio, Plotly |
 
 **Who should do these:**
-- No Python experience → Do **00a** first
-- Python OK, but new to ML → Do **00b** first
-- Comfortable with both → Skip to Lab 01
+- No Python experience → Start with **00a**
+- Python OK, new to ML → Start with **00b**
+- Want to use LLMs effectively → Do **00c** (highly recommended!)
+- Comfortable with all → Skip to Lab 01
 
 ```
-Lab 00a (Python) → Lab 00b (ML Concepts) → Lab 01 (First ML Project)
-     ↓                   ↓                        ↓
- "Learn Python      "Understand ML           "Build your first
-  with security      theory before            classifier"
-  examples"          coding"
+Lab 00a (Python) → Lab 00b (ML Concepts) → Lab 00c (Prompting) → Lab 01
+     ↓                   ↓                       ↓                   ↓
+ "Learn Python      "Understand ML         "Master LLM          "Build your
+  with security      theory before          prompts &            first ML
+  examples"          coding"                verification"        classifier"
 ```
+
+> 💡 **Pro Tip:** Even experienced developers should do **Lab 00c** - prompt engineering is the #1 skill for working with LLMs!
 
 ---
 
@@ -135,15 +139,15 @@ Choose based on your objectives:
 
 | Your Goal | Labs | Time | Prerequisites |
 |-----------|------|------|---------------|
-| **"I'm completely new"** | 00a → 00b → 01 → 02 | 6-8 hours | Nothing! |
-| **"I know Python, new to ML"** | 00b → 01 → 02 → 03 | 4-5 hours | Python basics |
-| **"I know ML, teach me LLMs"** | 04 → 06 → 05 | 4-5 hours | ML experience |
+| **"I'm completely new"** | 00a → 00b → 00c → 01 | 8-10 hours | Nothing! |
+| **"I know Python, new to ML"** | 00b → 00c → 01 → 02 | 6-7 hours | Python basics |
+| **"I know ML, teach me LLMs"** | 00c → 04 → 06 → 05 | 6-8 hours | ML experience |
 | **"I want to build agents"** | 04 → 05 → 10 | 5-6 hours | API key |
 | **"SOC/Detection focus"** | 01 → 03 → 09 → 11 → 15 | 10-12 hours | Python + ML basics |
 | **"DFIR specialist"** | 04 → 05 → 11 → 13 → 14 | 15-18 hours | Security background |
 | **"Red Team/Offensive"** | 12 → 14 → 15 → 16 | 16-20 hours | Security experience |
 | **"Threat Intel Analyst"** | 05 → 06 → 14 → 16 | 12-15 hours | TI fundamentals |
-| **"Complete everything"** | All 18 labs | 40-50 hours | Dedication |
+| **"Complete everything"** | All 19 labs | 45-55 hours | Dedication |
 
 ---
 
@@ -651,9 +655,10 @@ data_path = Path(__file__).parent.parent / "data" / "file.csv"
 
 Track your progress:
 
-**Prerequisites (Optional)**
+**Prerequisites (Optional but Recommended)**
 - [ ] Lab 00a: Python for Security Fundamentals
 - [ ] Lab 00b: ML Concepts Primer
+- [ ] Lab 00c: Prompt Engineering Mastery
 
 **Core Labs**
 - [ ] Lab 01: Phishing Classifier
