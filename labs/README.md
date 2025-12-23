@@ -115,6 +115,7 @@ Deep dive into incident response, threat simulation, and offensive security anal
 | 14 | [C2 Traffic Analysis](./lab14-c2-traffic-analysis/) | Network forensics | 4-5 hrs | Beaconing, DNS tunneling, encrypted C2 |
 | 15 | [Lateral Movement Detection](./lab15-lateral-movement-detection/) | Attack detection | 4-5 hrs | Auth anomalies, remote execution, graph analysis |
 | 16 | [Threat Actor Profiling](./lab16-threat-actor-profiling/) | Attribution | 4-5 hrs | TTP analysis, clustering, actor profiles |
+| 17 | [Adversarial ML](./lab17-adversarial-ml/) | Attack/Defense | 5-6 hrs | Evasion, poisoning, robust ML defenses |
 
 **Progression:**
 ```
@@ -123,13 +124,13 @@ Lab 11 (Ransomware) → Lab 12 (Purple Team) → Lab 13 (Memory Forensics)
  "Detect              "Validate              "Analyze
   ransomware"          detections"            memory dumps"
 
-Lab 14 (C2 Traffic) → Lab 15 (Lateral Movement) → Lab 16 (Attribution)
-     ↓                      ↓                          ↓
- "Detect C2            "Track attacker           "Profile
-  communications"        movement"                threat actors"
+Lab 14 (C2 Traffic) → Lab 15 (Lateral Movement) → Lab 16 (Attribution) → Lab 17 (Adversarial)
+     ↓                      ↓                          ↓                      ↓
+ "Detect C2            "Track attacker           "Profile             "Attack/defend
+  communications"        movement"                threat actors"        ML models"
 ```
 
-**Bridge from Core:** Labs 11-16 build on detection skills from Labs 09-10 and apply them to advanced DFIR scenarios. Memory forensics and C2 analysis require understanding of malware behavior from Lab 02.
+**Bridge from Core:** Labs 11-17 build on detection skills from Labs 09-10 and apply them to advanced DFIR and ML security scenarios. Lab 17 teaches how to attack and defend the ML models you built in earlier labs.
 
 ---
 
@@ -147,7 +148,8 @@ Choose based on your objectives:
 | **"DFIR specialist"** | 04 → 05 → 11 → 13 → 14 | 15-18 hours | Security background |
 | **"Red Team/Offensive"** | 12 → 14 → 15 → 16 | 16-20 hours | Security experience |
 | **"Threat Intel Analyst"** | 05 → 06 → 14 → 16 | 12-15 hours | TI fundamentals |
-| **"Complete everything"** | All 19 labs | 45-55 hours | Dedication |
+| **"ML Security/Adversarial"** | 01 → 02 → 09 → 17 | 10-12 hours | ML fundamentals |
+| **"Complete everything"** | All 20 labs | 50-60 hours | Dedication |
 
 ---
 
@@ -584,6 +586,26 @@ Attribution capabilities:
 
 ---
 
+### Lab 17: Adversarial Machine Learning
+
+**Attack and defend AI security models.**
+
+Skills learned:
+- Evasion attack techniques (FGSM, PGD)
+- Data poisoning and backdoor attacks
+- Adversarial training for robustness
+- Input validation and sanitization
+- Ensemble defenses
+
+Security capabilities:
+- Attack malware classifiers with perturbations
+- Defend against adversarial inputs
+- Build robust ML-based detectors
+- Evaluate model robustness
+- Understand real-world ML attacks
+
+---
+
 ## 💡 Tips for Success
 
 ### Before Starting
@@ -677,6 +699,7 @@ Track your progress:
 - [ ] Lab 14: C2 Traffic Analysis
 - [ ] Lab 15: Lateral Movement Detection
 - [ ] Lab 16: Threat Actor Profiling
+- [ ] Lab 17: Adversarial ML
 
 ---
 
