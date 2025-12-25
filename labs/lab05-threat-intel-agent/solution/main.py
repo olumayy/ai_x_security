@@ -330,12 +330,38 @@ class ReputationChecker:
     def check_ip(self, ip: str) -> dict:
         """Check IP reputation."""
         result = lookup_ip(ip)
-        result["score"] = result.get("threat_score", 0)
+
+        # Use abuse_score if available, otherwise threat_score, otherwise 0
+        score = result.get("abuse_score", result.get("threat_score", 0))
+        result["score"] = score
+
+        # Add classification based on score or is_malicious flag
+        if result.get("is_malicious", False):
+            result["classification"] = "malicious"
+        elif score > 70:
+            result["classification"] = "malicious"
+        elif score > 30:
+            result["classification"] = "suspicious"
+        else:
+            result["classification"] = "benign"
+
         return result
 
     def check_domain(self, domain: str) -> dict:
         """Check domain reputation."""
-        return analyze_domain(domain)
+        result = analyze_domain(domain)
+
+        # Add classification if not present
+        if "classification" not in result:
+            score = result.get("score", 0)
+            if score > 70:
+                result["classification"] = "malicious"
+            elif score > 30:
+                result["classification"] = "suspicious"
+            else:
+                result["classification"] = "benign"
+
+        return result
 
 
 class MITREMapper:
@@ -358,6 +384,10 @@ class MITREMapper:
     def map_behaviors(self, behaviors: list) -> list:
         """Map multiple behaviors to MITRE techniques."""
         return [self.map_technique(behavior) for behavior in behaviors]
+
+    def map_batch(self, behaviors: list) -> list:
+        """Map a batch of behaviors to MITRE techniques (alias for map_behaviors)."""
+        return self.map_behaviors(behaviors)
 
     def get_technique(self, technique_id: str) -> dict:
         """Get MITRE technique details."""
