@@ -29,16 +29,18 @@
 +-----------------------------------------------------------------------------+
 ```
 
-## Overview
+## 📊 Overview
 
 | Aspect | Details |
 |--------|---------|
-| **Time** | 5-6 hours |
+| **Time** | 2-2.5 hours (with AI assistance) |
 | **Difficulty** | Expert |
 | **Prerequisites** | Labs 01-03 (ML fundamentals), Lab 09 (Detection Pipeline) |
 | **Skills** | Attack techniques, defense strategies, robust ML |
 
-## Learning Objectives
+---
+
+## 🎯 Learning Objectives
 
 By the end of this lab, you will be able to:
 
