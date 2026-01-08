@@ -11,7 +11,7 @@ FLAG{some_text_here}
 
 ## Challenge Tiers
 
-### Beginner Challenges
+### Beginner Challenges (100 pts each)
 For those who have completed the foundational labs (00a-00i).
 
 | Challenge | Prerequisite Labs | Difficulty | API Key |
@@ -22,25 +22,36 @@ For those who have completed the foundational labs (00a-00i).
 | [04: Malware Classifier](beginner/04-malware-classifier/) | Lab 02 | Easy | No |
 | [05: Prompt Injection](beginner/05-prompt-injection/) | Lab 00c | Easy | No |
 
-### Intermediate Challenges
+### Intermediate Challenges (250 pts each)
 For those who have completed multiple core labs.
 
 | Challenge | Prerequisite Labs | Difficulty | API Key |
 |-----------|-------------------|------------|---------|
 | [01: C2 Hunter](intermediate/01-c2-hunter/) | Lab 04, 14 | Medium | Optional |
 | [02: Memory Forensics](intermediate/02-memory-forensics/) | Lab 13 | Medium | No |
-| [03: Adversarial ML](intermediate/03-adversarial-ml/) | Lab 17 | Medium | No |
+| [03: Adversarial Samples](intermediate/03-adversarial-samples/) | Lab 17 | Medium | No |
 | [04: Agent Investigation](intermediate/04-agent-investigation/) | Lab 05 | Medium | Optional |
 | [05: Ransomware Response](intermediate/05-ransomware-response/) | Lab 11 | Medium | No |
 
-### Advanced Challenges
+### Advanced Challenges (500 pts each)
 For those ready for real-world complexity.
 
 | Challenge | Prerequisite Labs | Difficulty | API Key |
 |-----------|-------------------|------------|---------|
-| [01: APT Campaign](advanced/01-apt-campaign/) | Multiple | Hard | Optional |
-| [02: Cloud Compromise](advanced/02-cloud-compromise/) | Lab 19 | Hard | Optional |
-| [03: Supply Chain Attack](advanced/03-supply-chain/) | Lab 08 | Hard | No |
+| [01: APT Attribution](advanced/01-apt-attribution/) | Lab 16 | Hard | Optional |
+| [02: Model Poisoning](advanced/02-model-poisoning/) | Lab 17 | Hard | No |
+| [03: Cloud Compromise](advanced/03-cloud-compromise/) | Lab 19 | Hard | Optional |
+| [04: Zero-Day Hunt](advanced/04-zero-day-hunt/) | Lab 03 | Hard | No |
+| [05: Full IR Scenario](advanced/05-full-ir-scenario/) | Lab 10 | Hard | Optional |
+
+## Quick Stats
+
+| Tier | Challenges | Total Points |
+|------|------------|--------------|
+| Beginner | 5 | 500 |
+| Intermediate | 5 | 1,250 |
+| Advanced | 5 | 2,500 |
+| **Total** | **15** | **4,250** |
 
 ## Tips for Success
 
@@ -58,11 +69,22 @@ For those ready for real-world complexity.
 - No penalty for incorrect submissions
 - Time is not tracked (learn at your own pace)
 
+## Recommended Order
+
+```
+Beginner 01-05 → Intermediate 01-05 → Advanced 01-05
+     ↓                  ↓                    ↓
+ Build core        Apply skills         Master complex
+ analysis          to harder            multi-phase
+ skills            scenarios            investigations
+```
+
 ## Getting Help
 
 - Review [Lab 00i: CTF Fundamentals](../labs/lab00i-ctf-fundamentals/) for CTF strategies
+- Review the prerequisite labs before attempting challenges
 - Use AI assistants to help with decoding and analysis
-- Community discussions (when available)
+- Check challenge hints (costs points but teaches concepts)
 
 ## Creating Your Own Challenges
 

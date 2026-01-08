@@ -5,6 +5,66 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-01-07
+
+### Added
+- **Cloud-Native Security Track**
+  - Lab 19b: Container Security - Image analysis, runtime detection, Kubernetes audit logs, container escape detection
+  - Lab 19c: Serverless Security - Function log analysis, event injection detection, IAM permission analysis
+  - Lab 19d: Cloud IR Automation - Automated containment, evidence collection, Step Functions orchestration
+
+- **AI Security Track**
+  - Lab 17b: LLM Security Testing - Prompt injection testing, jailbreak evaluation, data extraction tests
+  - Lab 17c: Model Monitoring - Data drift detection, adversarial input detection, model extraction monitoring
+  - Lab 18b: RAG Security - Knowledge base poisoning detection, context sanitization, access control
+
+- **Docker Lab Environment** (`docker/`)
+  - One-command setup with `docker compose up -d`
+  - Jupyter Lab with security-focused Python environment
+  - Elasticsearch + Kibana for log analysis
+  - PostgreSQL, Redis, MinIO for data storage
+  - Ollama for local LLM inference
+  - ChromaDB for vector storage (RAG labs)
+
+- **Enhanced XQL Validator** (`tools/xql_validator/`)
+  - Security pattern detection (template injection, command injection)
+  - Performance anti-pattern detection
+  - Issue categorization (syntax, security, performance, best_practice)
+  - Strict mode option
+  - Statistics tracking
+
+### Changed
+- Updated labs README with new tracks and labs
+- Improved XQL validation with more comprehensive rules
+
+## [1.7.0] - 2026-01-07
+
+### Added
+- **XQL Reference Guide** (`docs/guides/xql-guide.md`)
+  - Comprehensive Cortex XDR XQL syntax reference
+  - Verified against official documentation
+  - Includes datasets, functions, NGFW queries
+
+- **XQL Templates** (`templates/xql/`)
+  - Detection rules for credential access, persistence, lateral movement
+  - Threat hunting queries for process, network, and ransomware analysis
+
+- **New DFIR Labs**
+  - Lab 10b: Windows Event Log Analysis - Event IDs, lateral movement patterns, credential theft detection
+  - Lab 10c: Windows Registry Forensics - Persistence hunting, UserAssist, ShimCache, MRU artifacts
+  - Lab 10d: Live Response - Collection techniques, order of volatility, triage checklist
+
+- **New XQL Lab**
+  - Lab 21: XQL Threat Hunting - Cortex XDR queries with realistic attack scenarios ("Operation Midnight Heist")
+
+- **Test Coverage**
+  - Added test files for labs 00b, 02, 03, 04, 05, 06a, 07, 07b, 10a, 21
+
+### Changed
+- Updated labs README with new DFIR and XQL labs
+- Fixed CTF challenge directory paths
+- Improved CTF beginner challenge descriptions
+
 ## [1.6.0] - 2026-01-07
 
 ### Added

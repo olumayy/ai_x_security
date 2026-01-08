@@ -146,9 +146,15 @@ Deep dive into incident response, threat simulation, and offensive security anal
 | 16 | [Threat Actor Profiling](./lab16-threat-actor-profiling/) | Attribution | TTP analysis, clustering, actor profiles |
 | 17a | [ML Security Intro](./lab17a-ml-security-intro/) | **NEW! Bridge lab** | ML threat models, attack taxonomy |
 | 17 | [Adversarial ML](./lab17-adversarial-ml/) | Attack/Defense | Evasion, poisoning, robust ML defenses |
+| 17b | [LLM Security Testing](./lab17b-llm-security-testing/) | **NEW!** | Prompt injection, jailbreaks, data extraction |
+| 17c | [Model Monitoring](./lab17c-model-monitoring/) | **NEW!** | Drift detection, adversarial detection |
 | 18 | [Fine-Tuning for Security](./lab18-fine-tuning-security/) | Custom models | LoRA, security embeddings, deployment |
+| 18b | [RAG Security](./lab18b-rag-security/) | **NEW!** | KB poisoning, context sanitization |
 | 19a | [Cloud Security Fundamentals](./lab19a-cloud-security-fundamentals/) | **NEW! Bridge lab** | AWS/Azure/GCP basics, IAM, CloudTrail |
 | 19 | [Cloud Security AI](./lab19-cloud-security-ai/) | Multi-cloud | CloudTrail, AWS/Azure/GCP threat detection |
+| 19b | [Container Security](./lab19b-container-security/) | **NEW!** | Kubernetes, runtime detection, escapes |
+| 19c | [Serverless Security](./lab19c-serverless-security/) | **NEW!** | Lambda analysis, event injection, IAM |
+| 19d | [Cloud IR Automation](./lab19d-cloud-ir-automation/) | **NEW!** | Automated containment, evidence collection |
 | 20 | [LLM Red Teaming](./lab20-llm-red-teaming/) | Offensive AI Security | Prompt injection, jailbreaking, agentic attacks |
 
 **Progression:**
@@ -844,6 +850,26 @@ Test your skills with capture-the-flag challenges! These are separate from labs 
 |-----------|-----------|---------------|
 | [Log Detective](../ctf/beginner/01-log-detective/) | Lab 04 | Log analysis, pattern recognition |
 | [Phish Finder](../ctf/beginner/02-phish-finder/) | Lab 01 | Email classification, IOC extraction |
+
+### Intermediate Challenges (250 pts each)
+
+| Challenge | After Lab | Skills Tested |
+|-----------|-----------|---------------|
+| [C2 Hunter](../ctf/intermediate/01-c2-hunter/) | Lab 14 | Beaconing, DNS tunneling |
+| [Memory Forensics](../ctf/intermediate/02-memory-forensics/) | Lab 13 | Process injection, shellcode |
+| [Adversarial Samples](../ctf/intermediate/03-adversarial-samples/) | Lab 17 | ML evasion, PE analysis |
+| [Agent Investigation](../ctf/intermediate/04-agent-investigation/) | Lab 05 | Prompt injection, ReAct debugging |
+| [Ransomware Response](../ctf/intermediate/05-ransomware-response/) | Lab 11 | Crypto weakness, key recovery |
+
+### Advanced Challenges (500 pts each)
+
+| Challenge | After Lab | Skills Tested |
+|-----------|-----------|---------------|
+| [APT Attribution](../ctf/advanced/01-apt-attribution/) | Lab 16 | TTP mapping, actor profiling |
+| [Model Poisoning](../ctf/advanced/02-model-poisoning/) | Lab 17 | Backdoor detection, data poisoning |
+| [Cloud Compromise](../ctf/advanced/03-cloud-compromise/) | Lab 19 | Multi-cloud forensics |
+| [Zero-Day Hunt](../ctf/advanced/04-zero-day-hunt/) | Lab 03 | Behavioral anomaly detection |
+| [Full IR Scenario](../ctf/advanced/05-full-ir-scenario/) | Lab 10 | Complete IR lifecycle |
 
 > 💡 **Tip**: Complete the recommended lab before attempting each CTF challenge for the best learning experience. Labs teach the concepts; CTFs test your skills!
 
