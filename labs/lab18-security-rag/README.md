@@ -1,6 +1,6 @@
-# Lab 42: RAG System for Security Documentation
+# Lab 18: RAG System for Security Documentation
 
-**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 39, API key
+**Difficulty:** 🟡 Intermediate | **Time:** 60-90 min | **Prerequisites:** Lab 17, API key
 
 Build a Retrieval-Augmented Generation system for querying security documentation.
 
@@ -446,6 +446,6 @@ Question: {question}
 
 ---
 
-> **Stuck?** See the [Lab 42 Walkthrough](../../docs/walkthroughs/lab18-security-rag-walkthrough.md) for step-by-step guidance.
+> **Stuck?** See the [Lab 18 Walkthrough](../../docs/walkthroughs/lab18-security-rag-walkthrough.md) for step-by-step guidance.
 
 **Next Lab**: [Lab 21 - YARA Rule Generator](../lab21-yara-generator/)

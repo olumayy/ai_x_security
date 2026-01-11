@@ -510,7 +510,7 @@ This opens a browser window. Navigate to `notebooks/` and click any `.ipynb` fil
 
 ## Step 9: Test Run a Lab
 
-Let's make sure everything works by running Lab 29:
+Let's make sure everything works by running Lab 10:
 
 ```bash
 cd labs/lab10-phishing-classifier
@@ -835,4 +835,4 @@ Stuck? Here's where to get help:
 
 ---
 
-**You're all set!** Head to [Lab 29](../lab01-python-security-fundamentals/) if you're new to Python, or [Lab 29](../lab10-phishing-classifier/) if you're ready to build your first security ML tool.
+**You're all set!** Head to [Lab 01](../lab01-python-security-fundamentals/) if you're new to Python, or [Lab 10](../lab10-phishing-classifier/) if you're ready to build your first security ML tool.

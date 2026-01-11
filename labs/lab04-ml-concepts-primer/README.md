@@ -1,4 +1,4 @@
-# Lab 35: Machine Learning Concepts for Security
+# Lab 04: Machine Learning Concepts for Security
 
 Understand machine learning fundamentals before writing code. This lab explains **what** ML does and **why** it works, using security examples.
 
@@ -812,7 +812,7 @@ You now understand the concepts! Time to code:
 
 - **Lab 10**: Phishing Classifier - Build your first ML security tool
 - **Lab 31**: Malware Clustering - Unsupervised learning in practice
-- **Lab 32**: Anomaly Detection - Find the needle in the haystack
+- **Lab 12**: Anomaly Detection - Find the needle in the haystack
 
 ---
 
@@ -844,6 +844,6 @@ You now understand the concepts! Time to code:
 
 ---
 
-**Next Lab:** [Lab 02: Intro Prompt Engineering](../lab02-intro-prompt-engineering/) - Learn to communicate effectively with AI
+**Next Lab:** [Lab 07: Hello World ML](../lab07-hello-world-ml/) - Build your first machine learning model
 
 Or jump to: [Lab 10: Phishing Classifier](../lab10-phishing-classifier/) - Build your first ML security tool

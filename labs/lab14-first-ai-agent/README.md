@@ -1,8 +1,8 @@
-# Lab 34: Your First AI Agent [Bridge Lab]
+# Lab 14: Your First AI Agent [Bridge Lab]
 
-> **Bridge Lab:** This lab introduces agent concepts and tool calling before the full Threat Intel Agent in Lab 36.
+> **Bridge Lab:** This lab introduces agent concepts and tool calling before the full Threat Intel Agent in Lab 16.
 
-A gentle introduction to AI agents before diving into the full threat intelligence agent in Lab 36.
+A gentle introduction to AI agents before diving into the full threat intelligence agent in Lab 16.
 
 ---
 
@@ -12,7 +12,7 @@ A gentle introduction to AI agents before diving into the full threat intelligen
 |---|---|
 | **Difficulty** | Beginner-Intermediate |
 | **Time** | 45-60 minutes |
-| **Prerequisites** | Lab 35 (LLM Log Analysis) |
+| **Prerequisites** | Lab 08 (Working with APIs) |
 | **API Keys Required** | Yes (Anthropic, OpenAI, or Google) |
 
 ## Learning Objectives
@@ -25,7 +25,7 @@ By the end of this lab, you will understand:
 4. The ReAct pattern (Reason + Act) at a basic level
 5. When agents are useful vs. overkill
 
-> 🎯 **Bridge Lab**: This lab bridges Lab 35 (single LLM calls) and Lab 36 (full ReAct agent with memory and multiple tools). If Lab 36 feels too complex, start here.
+> 🎯 **Bridge Lab**: This lab bridges Lab 08 (single LLM calls) and Lab 16 (full ReAct agent with memory and multiple tools). If Lab 16 feels too complex, start here.
 
 ---
 
@@ -34,7 +34,7 @@ By the end of this lab, you will understand:
 ### Simple LLM vs. Agent
 
 ```
-SIMPLE LLM CALL (Lab 35):
+SIMPLE LLM CALL (Lab 08):
 ┌─────────┐     ┌─────────┐     ┌─────────┐
 │  User   │────▶│   LLM   │────▶│ Response│
 │  Input  │     │         │     │         │
@@ -371,11 +371,11 @@ The agent should answer from its training data without using tools. Verify this 
 
 ---
 
-## Part 5: Comparing to Lab 36
+## Part 5: Comparing to Lab 16
 
-Now that you understand the basics, here's how Lab 36 builds on this:
+Now that you understand the basics, here's how Lab 16 builds on this:
 
-| This Lab (04b) | Lab 36 (Threat Intel Agent) |
+| This Lab (04b) | Lab 16 (Threat Intel Agent) |
 |----------------|----------------------------|
 | 2 simple tools | 5+ tools (VirusTotal, MISP, etc.) |
 | No memory | Conversation memory |
@@ -384,7 +384,7 @@ Now that you understand the basics, here's how Lab 36 builds on this:
 | Simulated data | Real API integrations |
 | ~100 lines | ~500+ lines |
 
-**When you're ready**: Move to Lab 36 to build a full-featured threat intelligence agent!
+**When you're ready**: Move to Lab 16 to build a full-featured threat intelligence agent!
 
 ---
 
